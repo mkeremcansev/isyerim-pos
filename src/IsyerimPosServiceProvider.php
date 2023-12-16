@@ -2,8 +2,8 @@
 
 namespace Mkeremcansev\IsyerimPos;
 
-use Mkeremcansev\IsyerimPos\Services\IsyerimPOSInterface;
 use Mkeremcansev\IsyerimPos\Services\IsyerimPOS;
+use Mkeremcansev\IsyerimPos\Services\IsyerimPOSInterface;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
