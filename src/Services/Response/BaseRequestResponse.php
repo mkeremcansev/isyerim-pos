@@ -30,7 +30,6 @@ class BaseRequestResponse
         return $this->response->json('Message');
     }
 
-
     public function getResponse()
     {
         return $this->response->json();

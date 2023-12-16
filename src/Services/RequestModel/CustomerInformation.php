@@ -5,10 +5,15 @@ namespace Mkeremcansev\IsyerimPos\Services\RequestModel;
 class CustomerInformation
 {
     public string $name;
+
     public string $surname;
+
     public string $phone;
+
     public string $email;
+
     public string $address;
+
     public string $description;
 
     public function setCustomerInformation($name, $surname, $phone, $email, $address, $description): self

@@ -5,9 +5,13 @@ namespace Mkeremcansev\IsyerimPos\Services\RequestModel;
 class CardInformation
 {
     public string $cardOwner;
+
     public string $cardNo;
+
     public string $month;
+
     public string $year;
+
     public string $cvv;
 
     public function setCardInformation($cardOwner, $cardNo, $month, $year, $cvv): self

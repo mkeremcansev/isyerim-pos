@@ -11,13 +11,18 @@ use Mkeremcansev\IsyerimPos\Services\Response\TransactionsRequestResponse;
 class IsyerimPOS extends BasePOS implements IsyerimPOSInterface
 {
     public string $returnUrl = '';
-    public string $orderId = '';
-    public string $clientIP = '';
-    public int $installments = 0;
-    public string $amount = '';
-    public bool $is3D = false;
-    public bool $isAutoCommit = false;
 
+    public string $orderId = '';
+
+    public string $clientIP = '';
+
+    public int $installments = 0;
+
+    public string $amount = '';
+
+    public bool $is3D = false;
+
+    public bool $isAutoCommit = false;
 
     public function setReturnUrl(string $returnUrl): self
     {
@@ -149,7 +154,7 @@ class IsyerimPOS extends BasePOS implements IsyerimPOSInterface
 
         $response = $this->http()->post($url, [
             'Amount' => $this->amount,
-            'CardNumber' => $this->cardInformation->getCardNo()
+            'CardNumber' => $this->cardInformation->getCardNo(),
         ]);
 
         return new InstallmentsRequestResponse($response);

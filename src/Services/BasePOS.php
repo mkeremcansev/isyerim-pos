@@ -11,8 +11,11 @@ use Mkeremcansev\IsyerimPos\Services\RequestModel\Product;
 class BasePOS
 {
     public string $apiUrl = '';
+
     public CardInformation $cardInformation;
+
     public CustomerInformation $customerInformation;
+
     public Product $product;
 
     public function __construct()

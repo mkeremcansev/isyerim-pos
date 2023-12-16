@@ -4,7 +4,6 @@ namespace Mkeremcansev\IsyerimPos\Services\Response;
 
 class PayRequestResponse extends BaseRequestResponse
 {
-
     public function getPaymentLink(): ?string
     {
         return $this->response->json('Content.PaymentLink');
