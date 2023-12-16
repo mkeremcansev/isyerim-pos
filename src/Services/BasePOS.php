@@ -23,7 +23,7 @@ class BasePOS
         $this->cardInformation = new CardInformation();
         $this->customerInformation = new CustomerInformation();
         $this->product = new Product();
-        $this->apiUrl = str(config('isyerimpos.api_url'))->finish('/');
+        $this->apiUrl = str(config('isyerim-pos.api_url'))->finish('/');
     }
 
     public function http(): PendingRequest
