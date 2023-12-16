@@ -2,7 +2,6 @@
 
 namespace Mkeremcansev\IsyerimPos\Services\Response;
 
-
 class PayResultResponse extends BaseRequestResponse
 {
     public function getPaymentLink(): ?string

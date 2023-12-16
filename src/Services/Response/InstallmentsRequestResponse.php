@@ -2,7 +2,6 @@
 
 namespace Mkeremcansev\IsyerimPos\Services\Response;
 
-
 class InstallmentsRequestResponse extends BaseRequestResponse
 {
     public function getInstallments()
