@@ -28,10 +28,10 @@ class BasePOS
 
     public function http(): PendingRequest
     {
-        return Http::withHeaders($this->getCompanySecretInformations());
+        return Http::withHeaders($this->getCompanySecretCredentials());
     }
 
-    public function getCompanySecretInformations(): array
+    public function getCompanySecretCredentials(): array
     {
         return [
             'MerchantId' => config('isyerim-pos.merchant_id'),
