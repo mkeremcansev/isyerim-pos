@@ -7,7 +7,6 @@ use Mkeremcansev\IsyerimPos\Services\Response\ComissionsRatesRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\InstallmentsRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\PaymentConfirmationRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\PayRequestResponse;
-use Mkeremcansev\IsyerimPos\Services\Response\PayResultResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\TransactionsRequestResponse;
 
 class IsyerimPOS extends BasePOS implements IsyerimPOSInterface
