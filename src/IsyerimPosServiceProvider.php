@@ -2,7 +2,8 @@
 
 namespace Mkeremcansev\IsyerimPos;
 
-use Mkeremcansev\IsyerimPos\Commands\IsyerimPosCommand;
+use Mkeremcansev\IsyerimPos\Services\IsyerimPOSInterface;
+use Mkeremcansev\IsyerimPos\Services\IsyerimPOS;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -10,16 +11,19 @@ class IsyerimPosServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
-            ->name('isyerim-pos')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_isyerim-pos_table')
-            ->hasCommand(IsyerimPosCommand::class);
+            ->name('isyerim-pos');
+    }
+
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__.'/../config/isyerim-pos.php' => config_path('isyerim-pos.php'),
+        ], 'isyerim-pos-config');
+
+        $this->app->bind(
+            IsyerimPOSInterface::class,
+            IsyerimPOS::class
+        );
     }
 }
