@@ -2,8 +2,10 @@
 
 namespace Mkeremcansev\IsyerimPos\Services;
 
+use Mkeremcansev\IsyerimPos\Services\Response\BaseRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\ComissionsRatesRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\InstallmentsRequestResponse;
+use Mkeremcansev\IsyerimPos\Services\Response\PaymentConfirmationRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\PayRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\PayResultResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\TransactionsRequestResponse;
@@ -32,13 +34,13 @@ interface IsyerimPOSInterface
 
     public function createPayRequest(): PayRequestResponse;
 
-    public function paymentConfirmationFor3DRequest(string $uuid, ?string $confirmKey = null): PayRequestResponse;
+    public function paymentConfirmationFor3DRequest(string $uuid, ?string $confirmKey = null): PaymentConfirmationRequestResponse;
 
-    public function cancelRequest(string $uuid, string $description): PayRequestResponse;
+    public function cancelRequest(string $uuid, string $description): BaseRequestResponse;
 
-    public function refundRequest(string $uuid, string $amount, string $description): PayRequestResponse;
+    public function refundRequest(string $uuid, string $amount, string $description): BaseRequestResponse;
 
-    public function resultCheckRequest(string $uuid): PayResultResponse;
+    public function resultCheckRequest(string $uuid): PaymentConfirmationRequestResponse;
 
     public function getInstallmentsRequest(): InstallmentsRequestResponse;
 

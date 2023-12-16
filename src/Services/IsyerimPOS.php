@@ -2,8 +2,10 @@
 
 namespace Mkeremcansev\IsyerimPos\Services;
 
+use Mkeremcansev\IsyerimPos\Services\Response\BaseRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\ComissionsRatesRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\InstallmentsRequestResponse;
+use Mkeremcansev\IsyerimPos\Services\Response\PaymentConfirmationRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\PayRequestResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\PayResultResponse;
 use Mkeremcansev\IsyerimPos\Services\Response\TransactionsRequestResponse;
@@ -105,16 +107,16 @@ class IsyerimPOS extends BasePOS implements IsyerimPOSInterface
         return new PayRequestResponse($response);
     }
 
-    public function paymentConfirmationFor3DRequest(string $uuid, ?string $confirmKey = null): PayRequestResponse
+    public function paymentConfirmationFor3DRequest(string $uuid, ?string $confirmKey = null): PaymentConfirmationRequestResponse
     {
         $url = str($this->apiUrl)->append("payComplete?uid=$uuid&key=$confirmKey");
 
         $response = $this->http()->post($url);
 
-        return new PayRequestResponse($response);
+        return new PaymentConfirmationRequestResponse($response);
     }
 
-    public function cancelRequest(string $uuid, string $description): PayRequestResponse
+    public function cancelRequest(string $uuid, string $description): BaseRequestResponse
     {
         $url = str($this->apiUrl)->append('cancelRequest');
 
@@ -123,10 +125,10 @@ class IsyerimPOS extends BasePOS implements IsyerimPOSInterface
             'description' => $description,
         ]);
 
-        return new PayRequestResponse($response);
+        return new BaseRequestResponse($response);
     }
 
-    public function refundRequest(string $uuid, string $amount, string $description): PayRequestResponse
+    public function refundRequest(string $uuid, string $amount, string $description): BaseRequestResponse
     {
         $url = str($this->apiUrl)->append('refundRequest');
 
@@ -136,16 +138,16 @@ class IsyerimPOS extends BasePOS implements IsyerimPOSInterface
             'description' => $description,
         ]);
 
-        return new PayRequestResponse($response);
+        return new BaseRequestResponse($response);
     }
 
-    public function resultCheckRequest(string $uuid): PayResultResponse
+    public function resultCheckRequest(string $uuid): PaymentConfirmationRequestResponse
     {
         $url = str($this->apiUrl)->append("payResultCheck?uid=$uuid");
 
         $response = $this->http()->post($url);
 
-        return new PayResultResponse($response);
+        return new PaymentConfirmationRequestResponse($response);
     }
 
     public function getInstallmentsRequest(): InstallmentsRequestResponse
