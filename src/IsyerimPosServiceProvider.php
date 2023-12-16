@@ -2,9 +2,9 @@
 
 namespace Mkeremcansev\IsyerimPos;
 
+use Mkeremcansev\IsyerimPos\Commands\IsyerimPosCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Mkeremcansev\IsyerimPos\Commands\IsyerimPosCommand;
 
 class IsyerimPosServiceProvider extends PackageServiceProvider
 {
