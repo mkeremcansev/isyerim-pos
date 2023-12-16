@@ -34,9 +34,9 @@ class BasePOS
     public function getCompanySecretInformations(): array
     {
         return [
-            'MerchantId' => config('isyerimpos.merchant_id'),
-            'UserId' => config('isyerimpos.user_id'),
-            'ApiKey' => config('isyerimpos.api_key'),
+            'MerchantId' => config('isyerim-pos.merchant_id'),
+            'UserId' => config('isyerim-pos.user_id'),
+            'ApiKey' => config('isyerim-pos.api_key'),
         ];
     }
 }
