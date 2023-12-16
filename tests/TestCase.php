@@ -3,8 +3,8 @@
 namespace Mkeremcansev\IsyerimPos\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Mkeremcansev\IsyerimPos\IsyerimPosServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
