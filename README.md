@@ -1,19 +1,4 @@
-# This is my package isyerim-pos
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mkeremcansev/isyerim-pos.svg?style=flat-square)](https://packagist.org/packages/mkeremcansev/isyerim-pos)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mkeremcansev/isyerim-pos/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mkeremcansev/isyerim-pos/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mkeremcansev/isyerim-pos/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/mkeremcansev/isyerim-pos/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/mkeremcansev/isyerim-pos.svg?style=flat-square)](https://packagist.org/packages/mkeremcansev/isyerim-pos)
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/isyerim-pos.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/isyerim-pos)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+# IsyerimPOS Laravel Integration Package
 
 ## Installation
 
@@ -23,62 +8,153 @@ You can install the package via composer:
 composer require mkeremcansev/isyerim-pos
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="isyerim-pos-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="isyerim-pos-config"
 ```
 
-This is the contents of the published config file:
+Add env variables to your .env file
 
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="isyerim-pos-views"
+```env
+ISYERIMPOS_API_URL=
+ISYERIMPOS_API_KEY=
+ISYERIMPOS_MERCHANT_ID=
+ISYERIMPOS_USER_ID=
 ```
 
 ## Usage
 
 ```php
-$isyerimPos = new Mkeremcansev\IsyerimPos();
-echo $isyerimPos->echoPhrase('Hello, Mkeremcansev!');
+/*
+    * If you are going to change the service operation,
+    * you need to use the IsyerimPOSInterface interface.
+    * If the service operation will not change,
+    * the IsyerimPOS class can be used.
+*/
+
+use Mkeremcansev\IsyerimPos\Services\IsyerimPOSInterface;
+
+// OR
+
+use Mkeremcansev\IsyerimPos\Services\IsyerimPOS;
+
+// If the service process changes,
+// it should be added in in AppServiceProvider@boot as follows.
+
+$this->app->bind(
+    IsyerimPOSInterface::class, // interface
+    CustomIsyerimPOS::class // your custom class
+);
+
+$informations = resolve(IsyerimPOS::class)
+    ->setReturnUrl('http://redirect-url') // this parameter is the url that you want to redirect after payment
+    ->setOrderId('Created order id') // this parameter is the order id that you created
+    ->setClientIP(request()->getClientIp()) // this parameter if not set, will be set automatically
+    ->setInstallments(0) // this parameter is how many installments you want to use
+    ->setAmount('200.00') // this parameter is the amount of the order
+    ->setIs3D(true) // this parameter is if you want to use 3D secure
+    ->setIsAutoCommit(false) // this parameter is if you want to auto commit the order
+    ->setCardInformation(
+        cardOwner: 'Card owner',
+        cardNo: 'Card number',
+        month: 'Card month',
+        year: 'Card year',
+        cvv: 'Card cvv'
+    ) // this parameter is the card information
+    ->setCustomerInformation(
+        name: 'Customer name',
+        surname: 'Customer surname',
+        phone: 'Customer phone',
+        email: 'Customer email',
+        address: 'Customer address',
+        description: 'Customer description'
+    ) // this parameter is the customer information
+    ->setProducts(
+        [
+            [
+                'Name' => 'Product 1',
+                'Count' => 1,
+                'UnitPrice' => '100.00',
+            ],
+            [
+                'Name' => 'Product 2',
+                'Count' => 1,
+                'UnitPrice' => '100.00',
+            ],
+        ]
+    ); // this parameter is the products information
 ```
 
-## Testing
+## Available Methods
 
-```bash
-composer test
+```php
+// this method is for creating payment request
+$payRequest = $informations->createPayRequest();
+
+// get payment uuid
+$payRequest->getUuid();
+
+// get payment url
+$payRequest->getPaymentLink();
+
+// get payment html
+$payRequest->getPaymentHtml();
+
+// get payment order id
+$payRequest->getOrderId();
+
+// get payment confirm key
+$payRequest->getConfirmKey();
+
+// this method is for getting payment result for 3D secure
+$paymentConfirmationResponse = resolve(IsyerimPOS::class)->paymentConfirmationFor3DRequest(
+    uuid: $payRequest->getUuid(),
+    confirmKey: $payRequest->getConfirmKey()
+);
+
+// this method is canceling payment
+$cancelPayment = resolve(IsyerimPOS::class)->cancelRequest(
+    uuid: $payRequest->getUuid(),
+    description: 'Payment cancel description'
+);
+
+// this method is refunding payment
+$refundPayment = resolve(IsyerimPOS::class)->refundRequest(
+    uuid: $payRequest->getUuid(),
+    amount: 100.00,
+    description: 'Payment refund description'
+);
+
+// this method is checking payment result
+
+$checkPayment = resolve(IsyerimPOS::class)->resultCheckRequest(
+    uuid: $payRequest->getUuid()
+);
+
+// this method is get installments
+$installments = $informations->getInstallmentsRequest(
+    amount: 100.00,
+    cardNo: 'Card number'
+);
+
+// this method is get comissions rates
+$comissions = resolve(IsyerimPOS::class)->getComissionsRatesRequest();
+
+// this method is get transactions with between dates.
+// *Date parameters format is Y-m-d
+$transactions = resolve(IsyerimPOS::class)->getTransactionsRequest(
+    startDate: 'Start date',
+    endDate: 'End date'
+);
+
+// All request responses has the following methods
+$payRequest->isSuccess(); // this method is checking if the request is success
+$payRequest->getErrorCode(); // this method is getting error code
+$payRequest->isDone(); // this method is checking if the request is done
+$payRequest->getMessage(); // this method is getting message
+
+// If you cannot find the key you are looking for in the response class,
+// you can find all keys and values with following method
+$payRequest->getResponse(); // this method is getting response
 ```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Credits
-
-- [Mustafa Cansev](https://github.com/mkeremcansev)
-- [All Contributors](../../contributors)
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
