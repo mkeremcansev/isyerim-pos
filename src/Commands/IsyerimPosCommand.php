@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Mkeremcansev\IsyerimPos\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class IsyerimPosCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'isyerim-pos';
 
     public $description = 'My command';
 
