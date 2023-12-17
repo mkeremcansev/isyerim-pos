@@ -31,14 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mkeremcansev\\IsyerimPos\\": "src/",
-            "Mkeremcansev\\IsyerimPos\\Database\\Factories\\": "database/factories/"
+            "Mkeremcansev\\IsyerimPos\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Mkeremcansev\\IsyerimPos\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
@@ -70,10 +68,7 @@
         "laravel": {
             "providers": [
                 "Mkeremcansev\\IsyerimPos\\IsyerimPosServiceProvider"
-            ],
-            "aliases": {
-                "IsyerimPos": "Mkeremcansev\\IsyerimPos\\Facades\\IsyerimPos"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
