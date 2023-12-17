@@ -1,6 +1,6 @@
 <?php
 
-namespace Mkeremcansev\IsyerimPos\Services\RequestModel;
+namespace Mkeremcansev\IsyerimPos\RequestModel;
 
 class Product
 {

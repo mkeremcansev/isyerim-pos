@@ -1,6 +1,6 @@
 <?php
 
-namespace Mkeremcansev\IsyerimPos\Services\Response;
+namespace Mkeremcansev\IsyerimPos\Response;
 
 class PaymentConfirmationRequestResponse extends BaseRequestResponse
 {

@@ -4,9 +4,9 @@ namespace Mkeremcansev\IsyerimPos\Services;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
-use Mkeremcansev\IsyerimPos\Services\RequestModel\CardInformation;
-use Mkeremcansev\IsyerimPos\Services\RequestModel\CustomerInformation;
-use Mkeremcansev\IsyerimPos\Services\RequestModel\Product;
+use Mkeremcansev\IsyerimPos\RequestModel\CardInformation;
+use Mkeremcansev\IsyerimPos\RequestModel\CustomerInformation;
+use Mkeremcansev\IsyerimPos\RequestModel\Product;
 
 class BasePOS
 {

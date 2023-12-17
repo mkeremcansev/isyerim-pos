@@ -26,28 +26,11 @@ ISYERIMPOS_USER_ID=
 ## Usage
 
 ```php
-/*
-    * If you are going to change the service operation,
-    * you need to use the IsyerimPOSInterface interface.
-    * If the service operation will not change,
-    * the IsyerimPOS class can be used.
-*/
-
+// use
 use Mkeremcansev\IsyerimPos\Services\IsyerimPOSInterface;
 
-// OR
 
-use Mkeremcansev\IsyerimPos\Services\IsyerimPOS;
-
-// If the service process changes,
-// it should be added in in AppServiceProvider@boot as follows.
-
-$this->app->bind(
-    IsyerimPOSInterface::class, // interface
-    CustomIsyerimPOS::class // your custom class
-);
-
-$informations = resolve(IsyerimPOS::class)
+$informations = resolve(IsyerimPOSInterface::class)
     ->setReturnUrl('http://redirect-url') // this parameter is the url that you want to redirect after payment
     ->setOrderId('Created order id') // this parameter is the order id that you created
     ->setClientIP(request()->getClientIp()) // this parameter if not set, will be set automatically

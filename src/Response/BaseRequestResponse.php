@@ -1,6 +1,6 @@
 <?php
 
-namespace Mkeremcansev\IsyerimPos\Services\Response;
+namespace Mkeremcansev\IsyerimPos\Response;
 
 use Illuminate\Http\Client\Response;
 

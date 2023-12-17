@@ -2,13 +2,12 @@
 
 namespace Mkeremcansev\IsyerimPos\Services;
 
-use Mkeremcansev\IsyerimPos\Services\Response\BaseRequestResponse;
-use Mkeremcansev\IsyerimPos\Services\Response\ComissionsRatesRequestResponse;
-use Mkeremcansev\IsyerimPos\Services\Response\InstallmentsRequestResponse;
-use Mkeremcansev\IsyerimPos\Services\Response\PaymentConfirmationRequestResponse;
-use Mkeremcansev\IsyerimPos\Services\Response\PayRequestResponse;
-use Mkeremcansev\IsyerimPos\Services\Response\PayResultResponse;
-use Mkeremcansev\IsyerimPos\Services\Response\TransactionsRequestResponse;
+use Mkeremcansev\IsyerimPos\Response\BaseRequestResponse;
+use Mkeremcansev\IsyerimPos\Response\ComissionsRatesRequestResponse;
+use Mkeremcansev\IsyerimPos\Response\InstallmentsRequestResponse;
+use Mkeremcansev\IsyerimPos\Response\PaymentConfirmationRequestResponse;
+use Mkeremcansev\IsyerimPos\Response\PayRequestResponse;
+use Mkeremcansev\IsyerimPos\Response\TransactionsRequestResponse;
 
 interface IsyerimPOSInterface
 {

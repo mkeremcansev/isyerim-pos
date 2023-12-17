@@ -1,8 +1,8 @@
 <?php
 
-namespace Mkeremcansev\IsyerimPos\Services\Response;
+namespace Mkeremcansev\IsyerimPos\Response;
 
-class PayResultResponse extends BaseRequestResponse
+class PayRequestResponse extends BaseRequestResponse
 {
     public function getPaymentLink(): ?string
     {
