@@ -116,10 +116,7 @@ $checkPayment = resolve(IsyerimPOSInterface::class)->resultCheckRequest(
 );
 
 // this method is get installments
-$installments = $informations->getInstallmentsRequest(
-    amount: 100.00,
-    cardNo: 'Card number'
-);
+$installments = $informations->getInstallmentsRequest();
 
 // this method is get comissions rates
 $comissions = resolve(IsyerimPOSInterface::class)->getComissionsRatesRequest();
