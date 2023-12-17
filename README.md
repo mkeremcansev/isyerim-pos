@@ -91,19 +91,19 @@ $payRequest->getOrderId();
 $payRequest->getConfirmKey();
 
 // this method is for getting payment result for 3D secure
-$paymentConfirmationResponse = resolve(IsyerimPOS::class)->paymentConfirmationFor3DRequest(
+$paymentConfirmationResponse = resolve(IsyerimPOSInterface::class)->paymentConfirmationFor3DRequest(
     uuid: $payRequest->getUuid(),
     confirmKey: $payRequest->getConfirmKey()
 );
 
 // this method is canceling payment
-$cancelPayment = resolve(IsyerimPOS::class)->cancelRequest(
+$cancelPayment = resolve(IsyerimPOSInterface::class)->cancelRequest(
     uuid: $payRequest->getUuid(),
     description: 'Payment cancel description'
 );
 
 // this method is refunding payment
-$refundPayment = resolve(IsyerimPOS::class)->refundRequest(
+$refundPayment = resolve(IsyerimPOSInterface::class)->refundRequest(
     uuid: $payRequest->getUuid(),
     amount: 100.00,
     description: 'Payment refund description'
@@ -111,7 +111,7 @@ $refundPayment = resolve(IsyerimPOS::class)->refundRequest(
 
 // this method is checking payment result
 
-$checkPayment = resolve(IsyerimPOS::class)->resultCheckRequest(
+$checkPayment = resolve(IsyerimPOSInterface::class)->resultCheckRequest(
     uuid: $payRequest->getUuid()
 );
 
@@ -122,11 +122,11 @@ $installments = $informations->getInstallmentsRequest(
 );
 
 // this method is get comissions rates
-$comissions = resolve(IsyerimPOS::class)->getComissionsRatesRequest();
+$comissions = resolve(IsyerimPOSInterface::class)->getComissionsRatesRequest();
 
 // this method is get transactions with between dates.
 // *Date parameters format is Y-m-d
-$transactions = resolve(IsyerimPOS::class)->getTransactionsRequest(
+$transactions = resolve(IsyerimPOSInterface::class)->getTransactionsRequest(
     startDate: 'Start date',
     endDate: 'End date'
 );
