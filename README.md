@@ -5,7 +5,7 @@
 You can install the package via composer:
 
 ```bash
-composer require mkeremcansev/isyerim-pos
+composer require mkeremcansev/isyerim-pos @dev
 ```
 
 You can publish the config file with:
